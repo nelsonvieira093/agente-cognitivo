@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* ===============================
+   🎨 DESIGN SYSTEM EXECUTIVO DARK
+==================================*/
+
+:root {
+  --background: #0f172a;         /* slate-900 */
+  --foreground: #e5e7eb;         /* gray-200 */
+
+  --card: #111827;               /* gray-900 */
+  --card-border: #1f2937;        /* gray-800 */
+
+  --primary: #4f46e5;            /* indigo-600 */
+  --primary-hover: #4338ca;
+
+  --muted: #9ca3af;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* ===============================
+   COMPONENTES REUTILIZÁVEIS
+==================================*/
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #374151;
+}
+
+.input-dark {
+  background: #111827;
+  border: 1px solid #374151;
+  padding: 0.8rem;
+  border-radius: 10px;
+  color: #e5e7eb;
+  width: 100%;
+}
