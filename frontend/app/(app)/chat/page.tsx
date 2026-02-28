@@ -73,8 +73,10 @@ export default function ChatPage() {
     setChat((prev) => [...prev, { role: "user", content: text }]);
 
     try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
       const res = await axios.post(
-        "http://localhost:3000/api/cognitive/analyze",
+        `${API_URL}/api/cognitive/analyze`,
         { message: text },
         {
           headers: {
@@ -110,50 +112,47 @@ export default function ChatPage() {
   };
 
   return (
-  <div className="min-h-screen bg-[#0f172a] text-gray-200 p-10">
-    <h1 className="text-3xl font-bold mb-8 tracking-tight">
-      Copiloto Executivo
-    </h1>
+    <div className="min-h-screen bg-[#0f172a] text-gray-200 p-10">
+      <h1 className="text-3xl font-bold mb-8 tracking-tight">
+        Copiloto Executivo
+      </h1>
 
-    <div className="card h-[500px] overflow-y-auto mb-6">
-      {chat.map((msg, index) => (
-        <div key={index} className="mb-6">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="font-semibold text-indigo-400">
-              {msg.role === "user" ? "Daniela" : "Agente"}
-            </span>
+      <div className="card h-[500px] overflow-y-auto mb-6">
+        {chat.map((msg, index) => (
+          <div key={index} className="mb-6">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-semibold text-indigo-400">
+                {msg.role === "user" ? "Daniela" : "Agente"}
+              </span>
+            </div>
+            <pre className="whitespace-pre-wrap text-gray-300 text-sm leading-relaxed">
+              {msg.content}
+            </pre>
           </div>
-          <pre className="whitespace-pre-wrap text-gray-300 text-sm leading-relaxed">
-            {msg.content}
-          </pre>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      <textarea
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Digite sua entrada estratégica..."
+        className="input-dark mb-4"
+        rows={3}
+      />
+
+      <div className="flex gap-4">
+        <button
+          disabled={loading}
+          onClick={() => sendMessage(message)}
+          className="btn-primary disabled:opacity-50"
+        >
+          {loading ? "Enviando..." : "Enviar"}
+        </button>
+
+        <button onClick={startListening} className="btn-secondary">
+          {listening ? "🎙️ Ouvindo..." : "🎤 Falar"}
+        </button>
+      </div>
     </div>
-
-    <textarea
-      value={message}
-      onChange={(e) => setMessage(e.target.value)}
-      placeholder="Digite sua entrada estratégica..."
-      className="input-dark mb-4"
-      rows={3}
-    />
-
-    <div className="flex gap-4">
-      <button
-        disabled={loading}
-        onClick={() => sendMessage(message)}
-        className="btn-primary disabled:opacity-50"
-      >
-        {loading ? "Enviando..." : "Enviar"}
-      </button>
-
-      <button
-        onClick={startListening}
-        className="btn-secondary"
-      >
-        {listening ? "🎙️ Ouvindo..." : "🎤 Falar"}
-      </button>
-    </div>
-  </div>
-);
+  );
 }

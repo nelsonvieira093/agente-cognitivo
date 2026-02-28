@@ -1,3 +1,6 @@
+
+//C:\agente-cognitivo\frontend\app\(auth)\signup\page.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -10,9 +13,11 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const handleSignup = async () => {
     try {
-      await axios.post("http://localhost:3000/api/auth/signup", {
+      await axios.post(`${API_URL}/api/auth/signup`, {
         name,
         email,
         password,
