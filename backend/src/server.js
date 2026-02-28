@@ -1,5 +1,3 @@
-//E:\agente-cognitivo\backend\src\server.js
-
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -9,7 +7,7 @@ const cognitiveRoutes = require("./routes/cognitive.routes");
 
 const app = express();
 
-// Middlewares
+// CORS
 app.use(
   cors({
     origin: [
@@ -22,10 +20,9 @@ app.use(
   })
 );
 
-app.options("*", cors());
 app.use(express.json());
 
-// ✅ Rota raiz
+// Rota raiz
 app.get("/", (req, res) => {
   res.send("Agente Cognitivo Online 🚀");
 });
@@ -34,7 +31,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/cognitive", cognitiveRoutes);
 
-// Health check
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     status: "Agente Cognitivo operacional",
@@ -44,6 +40,6 @@ app.get("/api/health", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Agente Cognitivo rodando na porta ${PORT}`);
 });
