@@ -1,7 +1,10 @@
+
+// C:\agente-cognitivo\frontend\app\(app)\fronts\page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "@/lib/api";
 
 type StrategicFront = {
   id: number;
@@ -20,7 +23,7 @@ export default function StrategicFrontsPage() {
     const token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:3000/api/cognitive/strategic-fronts", {
+      .get(`${API_URL}/api/cognitive/strategic-fronts`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

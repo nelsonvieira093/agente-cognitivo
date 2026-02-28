@@ -1,7 +1,9 @@
+// C:\agente-cognitivo\frontend\app\(app)\radar\page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "@/lib/api";
 
 export default function RadarPage() {
   const [radar, setRadar] = useState<any>(null);
@@ -10,7 +12,7 @@ export default function RadarPage() {
     const token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:3000/api/cognitive/followup-radar", {
+      .get(`${API_URL}/api/cognitive/followup-radar`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
