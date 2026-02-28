@@ -13,6 +13,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ✅ Rota raiz
+app.get("/", (req, res) => {
+  res.send("Agente Cognitivo Online 🚀");
+});
+
 // Rotas
 app.use("/api/auth", authRoutes);
 app.use("/api/cognitive", cognitiveRoutes);
